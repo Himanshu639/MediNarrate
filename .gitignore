@@ -1,0 +1,4 @@
+static/
+.env
+__pycache__/
+build_env/*

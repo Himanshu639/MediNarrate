@@ -1,0 +1,29 @@
+Break down the following story into distinct segments to create stock video prompts. Follow these steps carefully:
+
+1) Segmenting the Story: Divide the story into logical scenes or key moments based on the narrative flow.
+2) Generalized Visual Prompts: Describe each scene with short, vivid, and specific visual details suitable for stock video searches. Use general descriptions without including any character names (e.g., 'a man climbing spiral stairs in a lighthouse' instead of 'Elias climbing stairs'). Focus on visuals that capture mood, setting, and action.
+3) Enhanced Story Text: Write a concise and clear 1-2 sentence summary of the segment that captures the essence of the moment. This text should read smoothly and be easily understandable in about 15 seconds.
+4) Mood and Setting Consistency: Ensure the visual prompts align with the story's tone, time of day, and setting. Use descriptive keywords like 'stormy night,' 'soft moonlight,' or 'busy marketplace at dawn' to keep the visuals relevant.
+5) Output Format: Return the result in this structured JSON format:
+json
+Copy code
+{  
+  "segments": [  
+    {  
+      "segment_number": 1,  
+      "prompt": "Generalized visual description with relevant keywords",  
+      "text": "Enhanced narrative text for the segment."  
+    },  
+    {  
+      "segment_number": 2,  
+      "prompt": "Next generalized visual description",  
+      "text": "Next enhanced narrative text."  
+    }  
+  ]  
+}  
+6) Avoid These Pitfalls:
+- Do not use any character names in the visual prompts. Keep them general.
+- Focus on the visuals, mood, and atmosphere to guide stock video searches effectively.
+- Be concise but descriptive enough for clarity.
+
+Here’s the story:
