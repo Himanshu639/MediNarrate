@@ -83,5 +83,6 @@ PEXELS_API=<YOUR_PEXELS_API_KEY>
 ```
 
 ### Step 6:
+- Open the IDE into the project folder `MN-1st-build` or cd into the project folder `MN-1st-build`.
 - Run the main.py by following command: `python main.py`.
 - Output will be in static folder named as `final.mp4`
