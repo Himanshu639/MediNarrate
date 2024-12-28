@@ -6,6 +6,11 @@ from moviepy import VideoFileClip, concatenate_videoclips, AudioFileClip
 #from moviepy.audio.AudioClip import CompositeAudioClip
 import requests
 import json
+import os
+
+if 'static' not in os.listdir():
+    os.makedirs('static')
+
 
 def download_video(video_url, file_name):
     response = requests.get(video_url, stream=True)
