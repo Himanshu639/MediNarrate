@@ -50,6 +50,6 @@ class mistral_ai:
 
 if __name__ == '__main__':
     gpt = mistral_ai()
-    prompt = 'What is queen\'s gambit?'
-    response = gpt.chat_completion(prompt,3)
+    prompt = 'Start writing dictionary of english words with their meaning in short sentence until your token limit is reached, which means you have to try to output as many words as you can'
+    response = gpt.chat_completion(prompt,2)
     print(response)

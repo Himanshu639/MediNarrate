@@ -2,3 +2,6 @@ static/
 .env
 __pycache__/
 build_env/*
+text.txt
+text.jpg
+temp.py
