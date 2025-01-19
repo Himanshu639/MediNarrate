@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediNarrate Upload</title>
+    <style>
+        /* Style for the loading screen */
+        #loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            text-align: center;
+        }
+
+        /* Center the spinner and text horizontally */
+        .spinner-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center; /* Vertical alignment */
+        }
+
+        /* Spinner style */
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 5px solid #ffffff;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 15px; /* Space between spinner and text */
+        }
+
+        /* Text next to the spinner */
+        .spinner-text {
+            color: #ffffff;
+            font-size: 20px;
+        }
+
+        /* Spinner animation */
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Text below spinner */
+        /* .spinner p {
+            color: #000000;
+            font-size: 20px;
+            margin-top: 10px;
+        } */
+        :root {
+            --primary-color: #3D8361;
+            --secondary-color: #275D43;
+            --text-dark: #000;
+            --text-light: #635C5C;
+            --border-color: #A4A1A1;
+            --white: #fff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            background-color: var(--white);
+        }
+
+        .upload-container {
+            display: flex;
+            max-width: 100%;
+            min-height: 100vh;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 auto;
+        }
+
+        .nav {
+            background-color: var(--primary-color);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .nav-title {
+            color: var(--white);
+            font-size: clamp(1.25rem, 2.5vw, 1.5625rem);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .main-content {
+            margin-top: 5rem;
+            padding: 2rem 1rem;
+            width: 100%;
+            max-width: 480px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .upload-title {
+            color: var(--primary-color);
+            font-size: clamp(1.75rem, 4vw, 2.25rem);
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .upload-description {
+            color: var(--text-light);
+            font-size: clamp(1rem, 2vw, 1.125rem);
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            padding: 0 1rem;
+        }
+
+        .upload-button {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 30px;
+            padding: 1rem 2rem;
+            font-size: clamp(1rem, 2vw, 1.375rem);
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            cursor: pointer;
+            width: 100%;
+            max-width: 364px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .upload-button:hover,
+        .upload-button:focus {
+            background-color: var(--primary-color);
+            outline: none;
+        }
+
+        #file-upload {
+            display: none;
+        }
+
+        .divider-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            width: 100%;
+            max-width: 340px;
+        }
+
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background-color: var(--border-color);
+        }
+
+        .divider-text {
+            color: var(--text-light);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .text-input-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .text-input-link:hover {
+            text-decoration: underline;
+        }
+
+        .text-input-container {
+            display: none;
+            width: 100%;
+            max-width: 364px;
+            margin-top: 1rem;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            outline: none;
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 1rem;
+        }
+
+        .text-submit {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 30px;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .text-submit:hover,
+        .text-submit:focus {
+            background-color: var(--secondary-color);
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="upload-container">
+        <nav class="nav" role="navigation">
+            <a href="#" class="nav-brand">
+                <span class="nav-title">MediNarrate</span>
+            </a>
+        </nav>
+
+        <main class="main-content">
+            <h1 class="upload-title">Upload Your Content</h1>
+            
+            <p class="upload-description">
+                Submit an image, PDF, or text file, or type your content manually to explore
+                dynamic visual representations.
+            </p>
+
+            <!-- Loading Screen -->
+            <div id="loading">
+                <div class="spinner-container">
+                    <div class="spinner"></div>
+                    <p class="spinner-text">Processing... Please wait.</p>
+                </div>
+            </div>
+            
+            <!-- Upload Button -->
+            <!-- <label for="file-upload" class="upload-button">
+                Upload File
+            </label>
+            <input type="file" id="file-upload" accept=".pdf,.txt,.jpg,.jpeg,.png"> -->
+
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <label for="file-upload" class="upload-button">
+                    Upload File
+                </label>
+                <input type="file" name="file" id="file-upload" accept=".jpg,.jpeg,.png" required onchange="autoSubmit(this)">
+            </form>
+            
+            <div class="divider-container" role="separator">
+                <div class="divider-line"></div>
+                <span class="divider-text">or</span>
+                <div class="divider-line"></div>
+            </div>
+            
+            <!-- Text Input Section -->
+            <!-- <form action="/upload" method="post" enctype="multipart/form-data">
+                <label for="file-upload" class="upload-button">
+                    Upload File
+                </label>
+                <input type="file" name="file" id="file-upload" accept=".jpg,.jpeg,.png" required onchange="autoSubmit(this)">
+            </form> -->
+            <a class="text-input-link" onclick="showTextInput()">Enter Text Here</a>
+            <form action="/upload" method="post" id="text-input-container" class="text-input-container">
+                <textarea name="text" class="text-input" placeholder="Type your text here..." id="text-input"></textarea>
+
+                <button class="text-submit" required onclick="autoSubmit(this)">Submit</button>
+            </form>
+            <!-- <div class="text-input-container" id="text-input-container">
+                <textarea class="text-input" placeholder="Type your text here..." id="text-input"></textarea>
+                <button class="text-submit" onclick="handleTextSubmit()">Submit</button>
+            </div> -->
+        </main>
+    </div>
+
+    <script>
+        // const API_URL = "http://127.0.0.1:5000"; // Flask Backend URL
+
+        // // Handle file upload
+        // async function handleFileUpload(event) {
+        //     const file = event.target.files[0];
+        //     if (file) {
+        //         const formData = new FormData();
+        //         formData.append("file", file);
+
+        //         try {
+        //             const response = await fetch(`${API_URL}/upload`, {
+        //                 method: "POST",
+        //                 body: formData,
+        //             });
+
+        //             const result = await response.json();
+        //             alert(result.message || "File uploaded successfully!");
+        //         } catch (error) {
+        //             alert("Error uploading file. Please try again.");
+        //         }
+        //     }
+        // }
+
+        // // Show the text input container
+        function showTextInput() {
+            document.getElementById("text-input-container").style.display = "flex";
+        }
+
+        // // Handle text submit
+        // async function handleTextSubmit() {
+        //     const text = document.getElementById("text-input").value.trim();
+        //     if (text) {
+        //         try {
+        //             const response = await fetch(`${API_URL}/text`, {
+        //                 method: "POST",
+        //                 headers: {
+        //                     "Content-Type": "application/json",
+        //                 },
+        //                 body: JSON.stringify({ text }),
+        //             });
+
+        //             const result = await response.json();
+        //             alert(result.message || "Text submitted successfully!");
+        //         } catch (error) {
+        //             alert("Error submitting text. Please try again.");
+        //         }
+        //     } else {
+        //         alert("Please enter some text.");
+        //     }
+        // }
+        function autoSubmit(input) {
+            const form = input.form;
+            // Show the loading screen
+            document.getElementById("loading").style.display = "block";
+            form.submit();
+        }
+    </script>
+</body>
+</html>

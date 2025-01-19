@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Display Video</title>
+    <script>
+    // <!-- Final video removal is still pending -->
+    // <!-- must be implemented with JS -->
+    // <!-- To cleanup, make post request to `/cleanup` with video_url` -->
+    </script>
+</head>
+<body>
+    <h1>Here's your video</h1>
+    <video controls width="1080">
+        <source src="{{ video_url }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <br><br>
+    <a href="/upload">Upload Another Image</a>
+</body>
+</html>

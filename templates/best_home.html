@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediNarrate Landing</title>
+    <style>
+        :root {
+            --primary-color: rgba(61, 131, 97, 1);
+            --secondary-color: rgba(39, 93, 67, 1);
+            --text-color: rgba(56, 56, 56, 1);
+            --white: rgba(255, 255, 255, 1);
+            --black: rgba(0, 0, 0, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            width: 100vw;
+            overflow-x: hidden;
+        }
+
+        .landing-container {
+            width: 100vw;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav {
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 40px;
+            font-weight: 700;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100vw;
+            padding-top: 56.25%;
+            margin: 0;
+        }
+
+        .main-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .username-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: var(--white);
+            font-size: 40px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+
+        .nav-menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            width: 100%;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 40px;
+            font-weight: 700;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateX(10px);
+        }
+
+        .menu-indicator {
+            width: 4px;
+            height: 40px;
+            background-color: var(--primary-color);
+        }
+
+        .cta-section {
+            background-color: var(--primary-color);
+            padding: 4rem 2rem;
+            text-align: center;
+            margin: 0;
+            width: 100%;
+        }
+
+        .cta-title {
+            color: var(--white);
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .cta-description {
+            color: var(--white);
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        .email-form {
+            display: flex;
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 30px;
+            padding: 0.5rem;
+        }
+
+        .email-input {
+            flex: 1;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 24px;
+            font-weight: 700;
+            outline: none;
+            background: transparent;
+        }
+
+        .submit-button {
+            background: var(--secondary-color);
+            color: var(--white);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: var(--primary-color);
+        }
+
+        .footer {
+            padding: 4rem 2rem;
+            background: var(--white);
+            width: 100%;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.2);
+        }
+
+        .footer-divider {
+            height: 2px;
+            background: var(--black);
+            margin: 2rem 0;
+            width: 100%;
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .nav-brand {
+                font-size: 32px;
+            }
+
+            .email-form {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+                margin: 0 1rem;
+            }
+
+            .submit-button {
+                width: 100%;
+            }
+
+            .nav-menu {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .menu-item {
+                font-size: 32px;
+            }
+
+            .username-overlay {
+                font-size: 32px;
+                top: 10px;
+                left: 10px;
+            }
+
+            .cta-title,
+            .cta-description,
+            .email-input,
+            .submit-button,
+            .footer-content,
+            .copyright {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-brand {
+                font-size: 24px;
+            }
+
+            .menu-item,
+            .username-overlay,
+            .cta-title,
+            .cta-description,
+            .email-input,
+            .submit-button,
+            .footer-content,
+            .copyright {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="landing-container">
+        <nav class="nav">
+            <a href="/" class="nav-brand">
+                <img src="https://cdn.builder.io/api/v1/image/assets/533a452b34d54afea4c526aec18aabc6/0f2dabd25f05ba4579e9d63a6f9e3c552ba82edc58a795c8a265d3cb13c88ca6?apiKey=533a452b34d54afea4c526aec18aabc6&" alt="MediNarrate Logo" class="logo">
+                <span>MediNarrate</span>
+            </a>
+            <button class="menu-toggle" aria-label="Toggle navigation menu">
+                <img src="https://cdn.builder.io/api/v1/image/assets/533a452b34d54afea4c526aec18aabc6/3b4bb78c201cb0f5bc13d9bcfd7c7e7c62b62c1bac3e4ea7f921335dc1dab459?apiKey=533a452b34d54afea4c526aec18aabc6&" alt="Menu" width="40" height="40">
+            </button>
+        </nav>
+
+        <div class="video-container">
+            <div class="username-overlay">Hello Username</div>
+            <video class="main-video" autoplay muted loop playsinline>
+                <source src="https://cdn.builder.io/o/assets%2F533a452b34d54afea4c526aec18aabc6%2F355a9fd877af4d99b7d46f141c83c60c%2Fcompressed?apiKey=533a452b34d54afea4c526aec18aabc6&token=355a9fd877af4d99b7d46f141c83c60c&alt=media&optimized=true" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="/upload" class="menu-item">
+                <div class="menu-indicator"></div>
+                <span>Text to Video</span>
+            </a>
+            <a href="/trends" class="menu-item">
+                <div class="menu-indicator"></div>
+                <span>Trends</span>
+            </a>
+            <a href="/history" class="menu-item">
+                <div class="menu-indicator"></div>
+                <span>History</span>
+            </a>
+        </nav>
+
+        <section class="cta-section">
+            <h2 class="cta-title">Join Our Creative Community Today!</h2>
+            <p class="cta-description">Start leveraging the power of video storytelling—make an impact with your words!</p>
+            <form class="email-form" action="/subscribe" method="POST">
+                <input type="email" class="email-input" placeholder="Enter your email" required aria-label="Email address">
+                <button type="submit" class="submit-button">Join Now</button>
+            </form>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <div>
+                    <h3>MediNarrate</h3>
+                    <p>We are dedicated to transforming content into vibrant stories.</p>
+                </div>
+                <div>
+                    <h4>Contact us</h4>
+                    <p>ekadmi@example.com</p>
+                    <p>+1 234 567 8901</p>
+                    <a href="/support">Help and support</a>
+                </div>
+            </div>
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/533a452b34d54afea4c526aec18aabc6/ef1bfb27ff1f25e4611d53a1eaaaa1b4d3e97441c66918525e6220eac4083b2d?apiKey=533a452b34d54afea4c526aec18aabc6&" alt="" class="social-icon">
+                </a>
+                <a href="#" aria-label="Twitter">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/533a452b34d54afea4c526aec18aabc6/d47e95e6a0679eb277fd04dd7517f0df9f7bcbdf2c410124f1f5f48ddc5fc2dc?apiKey=533a452b34d54afea4c526aec18aabc6&" alt="" class="social-icon">
+                </a>
+                <a href="#" aria-label="Instagram">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/533a452b34d54afea4c526aec18aabc6/4d46298e195ff8a3a62f7a76bccfeca696219d34974c9004067c05894273937c?apiKey=533a452b34d54afea4c526aec18aabc6&" alt="" class="social-icon">
+                </a>
+                <a href="#" aria-label="LinkedIn">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/533a452b34d54afea4c526aec18aabc6/f665d9141b28951f78e7b97383fa8eb480f59266bcb9024ff144844567d6d271?apiKey=533a452b34d54afea4c526aec18aabc6&" alt="" class="social-icon">
+                </a>
+            </div>
+            <div class="footer-divider"></div>
+            <p class="copyright">© 2024 MediNarrate, we love our users!</p>
+        </footer>
+    </div>
+</body>
+</html>

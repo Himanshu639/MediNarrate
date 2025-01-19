@@ -1,26 +1,72 @@
-from utils.mistral_ai import mistral_ai
 from utils.ocr import get_text
 from utils.video_processing import make_video
-import json
+from utils.mistral_results_processor import generate_and_preprocess
+from flask import Flask, request, render_template, redirect, url_for, session
+from dotenv import load_dotenv
 import os
 
-if 'static' not in os.listdir():
-    os.makedirs('static')
+load_dotenv()
+UPLOAD_DIR = 'static/uploads'
+VIDEO_DIR = 'static/videos'
+os.makedirs(UPLOAD_DIR, exist_ok=True)
+os.makedirs(VIDEO_DIR, exist_ok=True)
+app = Flask(__name__)
+app.secret_key = os.getenv('FLASK_KEY')
 
 
-gpt = mistral_ai()
-with open('utils/template.txt', 'r') as file:
-    template = file.read()
+@app.route('/')
+def front_page():
+    return render_template('best_intro.html')
 
-# with open('utils/text.txt','r') as file:
-#     text = file.read()
-text = get_text('utils/text.jpg')
+@app.route('/home')
+def home_page():
+    return render_template('best_home.html')
 
-prompt = template + text
-response = gpt.chat_completion(prompt,1)
-print(response)
+@app.route('/login')
+def login_page():
+    return render_template('best_login.html')
 
-json_obj = json.loads(response[7:-3])
+@app.route('/register')
+def register_page():
+    return render_template('best_register.html')
+
+@app.route('/upload',methods=['POST','GET'])
+def upload_page():
+    if request.method == 'POST':
+        file = request.files.get('file')
+        if file:
+            file_path = os.path.join(UPLOAD_DIR, file.filename)
+            file.save(file_path)
+
+            text = get_text(file_path)
+            os.remove(file_path)
+        else:
+            text = request.form.get('text')
+
+        try:
+            session['video_url'] = make_video(json_obj=generate_and_preprocess(text))
+        except:
+            return "Either too short text or no text found"
+                
+        return redirect(url_for('display_image'))
+    
+    return render_template('best_upload.html')
+
+@app.route('/display')
+def display_image():
+    video_url = session.get('video_url') 
+    if video_url and os.path.exists(video_url):
+        session.pop('video_url', None)
+        return render_template('display.html', video_url=video_url)
+    return "No file to display"
+
+@app.route('/cleanup', methods=['POST'])
+def cleanup_video():
+    video_url = request.form.get('video_url')  
+    if video_url and os.path.exists(video_url):
+        os.remove(video_url)
+    return "Video cleaned up", 200
 
 
-make_video(json_obj=json_obj)
+
+app.run(debug=True)
