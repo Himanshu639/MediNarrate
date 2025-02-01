@@ -1,4 +1,4 @@
-# MN-1st-build
+# MediNarrate
 
 This build is essential part of MediNarriate project, this build accomplishes the gathering of videos and also combining in the end.
 This part of project goes through following process.
