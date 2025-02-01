@@ -1,6 +1,6 @@
 # MediNarrate
 
-This build is essential part of MediNarriate project, this build accomplishes the gathering of videos and also combining in the end.
+This build is essential part of MediNarrate project, this build accomplishes the gathering of videos and also combining in the end.
 This part of project goes through following process.
 
 
@@ -48,7 +48,7 @@ This part of project goes through following process.
 ### Step 1:
 - To download this repository, use following command:
 ```bash
-git clone https://github.com/Himanshu639/MN-1st-build.git
+git clone https://github.com/Himanshu639/MediNarrate.git
 ```
 
 ### Step 2: 
@@ -83,6 +83,6 @@ PEXELS_API=<YOUR_PEXELS_API_KEY>
 ```
 
 ### Step 6:
-- Open the IDE into the project folder `MN-1st-build` or cd into the project folder `MN-1st-build`.
+- Open the IDE into the project folder `MediNarrate` or cd into the project folder `MediNarrate`.
 - Run the main.py by following command: `python main.py`.
 - Output will be in static folder named as `final.mp4`
