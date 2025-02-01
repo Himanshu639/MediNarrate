@@ -1,6 +1,7 @@
 from utils.ocr import get_text
 from utils.video_processing import make_video
-from utils.mistral_results_processor import generate_and_preprocess
+# from utils.mistral_results_processor import generate_and_preprocess
+from utils.llama3_llm import generate_and_preprocess
 from flask import Flask, request, render_template, redirect, url_for, session
 from dotenv import load_dotenv
 import os

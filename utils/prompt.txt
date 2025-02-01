@@ -5,8 +5,6 @@ Break down the following story into distinct segments to create stock video prom
 3) Enhanced Story Text: Write a concise and clear 1-2 sentence summary of the segment that captures the essence of the moment. This text should read smoothly and be easily understandable in about 15 seconds.
 4) Mood and Setting Consistency: Ensure the visual prompts align with the story's tone, time of day, and setting. Use descriptive keywords like 'stormy night,' 'soft moonlight,' or 'busy marketplace at dawn' to keep the visuals relevant.
 5) Output Format: Return the result in this structured JSON format:
-json
-Copy code
 {  
   "segments": [  
     {  
@@ -25,5 +23,6 @@ Copy code
 - Do not use any character names in the visual prompts. Keep them general.
 - Focus on the visuals, mood, and atmosphere to guide stock video searches effectively.
 - Be concise but descriptive enough for clarity.
+- Do not output anything except json, anything else will fail the parsing of json
 
 Here’s the story:

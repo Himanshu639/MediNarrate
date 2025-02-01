@@ -3,12 +3,13 @@ import json
 
 def generate_and_preprocess(text:str) -> dict:
     
-    with open('utils/template.txt', 'r') as file:
-        template = file.read()
+    with open('utils/prompt.txt', 'r') as file:
+        prompt = file.read()
+
+    full_prompt = prompt + text
 
     gpt = mistral_ai()
-    prompt = template + text
-    response = gpt.chat_completion(prompt,1)
+    response = gpt.chat_completion(full_prompt,1)
     print(response)
 
     json_obj = json.loads(response[7:-3])
