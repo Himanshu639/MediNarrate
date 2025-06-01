@@ -1,10 +1,13 @@
 import os
 import requests
-from gtts import gTTS
-from mutagen.mp3 import MP3
+# from gtts import gTTS
+from TTS.api import TTS
+from mutagen import File
 from utils.pexels_api import get_videos
 from moviepy import VideoFileClip, concatenate_videoclips, AudioFileClip
 #from moviepy.audio.AudioClip import CompositeAudioClip
+
+tts = TTS('tts_models/en/jenny/jenny',gpu=True)
 
 VIDEO_DIR = 'static/videos'
 def download_video(video_url, file_name):
@@ -23,10 +26,12 @@ def download_video(video_url, file_name):
 def process_segment(segment):
     # audio_path = f"static/{segment['segment_number']}.mp3"
     audio_path = os.path.join(VIDEO_DIR,f"{segment['segment_number']}.mp3")
-    tts = gTTS(text=segment['text'])
-    tts.save(audio_path)
+    # tts = gTTS(text=segment['text'])
+    # tts.save(audio_path)
+    tts.tts_to_file(segment['text'],file_path=audio_path)
+    audio = File(audio_path)
     
-    audio = MP3(audio_path)
+    audio = File(audio_path)
     audio_length = round(audio.info.length)
 
     video_dist = get_videos(segment['prompt'], limit=audio_length)
