@@ -193,7 +193,7 @@
         <img src="https://cdn.builder.io/api/v1/image/assets/533a452b34d54afea4c526aec18aabc6/4f5ee80435d66eb73ebbd6fac4ac7fd83f925309?placeholderIfAbsent=true" alt="Video placeholder" class="placeholder-icon" />
       </section> -->
 
-      <video controls width="1080">
+      <video controls width="640">
         <source src="{{ video_url }}" type="video/mp4">
         Your browser does not support the video tag.
       </video>
@@ -202,19 +202,22 @@
         <div class="input-label">Input Text</div>
 
         <article class="content-card">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+          <p>{{ input_text }}</p>
         </article>
 
         <div class="action-buttons">
+          <a href="{{ video_url }}" download>   
           <button class="action-button download-button">
             <img src="https://cdn.builder.io/api/v1/image/assets/533a452b34d54afea4c526aec18aabc6/2de371bcfbd00fa5ac8d28c6a23f033b0dfafe90?placeholderIfAbsent=true" alt="Download icon" class="button-icon" />
             <span>Download Video</span>
           </button>
+          </a>
+          <a href="/upload">
           <button class="action-button generate-button">
             <img src="https://cdn.builder.io/api/v1/image/assets/533a452b34d54afea4c526aec18aabc6/6ed719d3769f61cab432f297c8bce8b8dabf0507?placeholderIfAbsent=true" alt="Generate icon" class="button-icon" />
             <span>Generate New</span>
           </button>
+          </a>
         </div>
       </div>
     </div>

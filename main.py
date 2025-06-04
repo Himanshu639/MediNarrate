@@ -43,7 +43,7 @@ def upload_page():
             os.remove(file_path)
         else:
             text = request.form.get('text')
-
+            session['input_text'] = text
         try:
             session['video_url'] = make_video(json_obj=generate_and_preprocess(text))
         except:
@@ -56,9 +56,10 @@ def upload_page():
 @app.route('/display')
 def display_image():
     video_url = session.get('video_url') 
+    input_text = session.get('input_text')
     if video_url and os.path.exists(video_url):
         session.pop('video_url', None)
-        return render_template('output.html', video_url=video_url)
+        return render_template('output.html', video_url=video_url, input_text=input_text)
     return "No file to display"
 
 @app.route('/cleanup', methods=['POST'])
