@@ -58,7 +58,7 @@ def display_image():
     video_url = session.get('video_url') 
     if video_url and os.path.exists(video_url):
         session.pop('video_url', None)
-        return render_template('display.html', video_url=video_url)
+        return render_template('output.html', video_url=video_url)
     return "No file to display"
 
 @app.route('/cleanup', methods=['POST'])
