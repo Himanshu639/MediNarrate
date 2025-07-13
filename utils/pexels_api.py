@@ -83,5 +83,3 @@ def get_videos(query:str, limit:int) -> list[dict[str:str, int]]:
 if __name__=='__main__':
     video_dist = get_videos('communication',22)
     print(json.dumps(video_dist,indent=4))
-
-# ->>  <=>  
